@@ -14,7 +14,7 @@
   - [Project roadmap](#project-roadmap)
   - [Getting started](#getting-started)
   - [Live demo](#live-demo)
-  - [Built with paid IBM Cloud](#built-with)
+  - [Built with](#built-with-paid-IBM-services)
   - [Contributing](#contributing)
   - [Versioning](#versioning)
   - [Authors](#authors)
@@ -169,7 +169,7 @@ Now the website will use the API services to show data on Web UI/Mobile UI
 You can find a running backend system to test at [pythontoolchain-20210617080845201-forgiving-fox.us-east.mybluemix.net](http://pythontoolchain-20210617080845201-forgiving-fox.us-east.mybluemix.net)  
 you can find frontend UI to test at [testtoolchaingroup.us-east.mybluemix.net]( https://testtoolchaingroup.us-east.mybluemix.net/)  
 
-## Built with
+## Built with paid IBM services
 
 The project is built using following IBM services with paid IBM cloud.
 
