@@ -169,13 +169,14 @@ Now the website will use the API services to show data on Web UI/Mobile UI
 You can find a running backend system to test at [pythontoolchain-20210617080845201-forgiving-fox.us-east.mybluemix.net](http://pythontoolchain-20210617080845201-forgiving-fox.us-east.mybluemix.net)  
 you can find frontend UI to test at [testtoolchaingroup.us-east.mybluemix.net]( https://testtoolchaingroup.us-east.mybluemix.net/)  
 
-## Built with
+## Built with paid IBM Cloud
 
 - [IBM Cloud Foundry](https://www.cloudfoundry.org/the-foundry/ibm-cloud-foundry/) - To deploy UI and python backend
 - [IBM Angular API](https://developer.ibm.com/technologies/web-development/tutorials/wa-implement-a-single-page-application-with-angular2/)- The web framework used
 - [IBM Watson Studio](https://www.ibm.com/in-en/cloud/watson-studio) - Data Preparation
 - [IBM Python Flask App](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/ml-python-flask-mnist-tutorial.html) - To create restful API
 - [IBM toolchain (CI/CD)](https://www.ibm.com/in-en/cloud/continuous-delivery)- To deploy restful API and web ui
+![Built with](https://github.com/dimplekumawat1902/AI-Agventure-Final/blob/main/images/IBM-CI-CD-integration.PNG)
 
 ## Contributing
 
