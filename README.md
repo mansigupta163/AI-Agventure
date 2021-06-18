@@ -14,7 +14,7 @@
   - [Project roadmap](#project-roadmap)
   - [Getting started](#getting-started)
   - [Live demo](#live-demo)
-  - [Built with](#Built with paid IBM Cloud)
+  - [Built with paid IBM Cloud](#built-with)
   - [Contributing](#contributing)
   - [Versioning](#versioning)
   - [Authors](#authors)
