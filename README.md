@@ -43,18 +43,18 @@ and soil irrigation without affecting environment.
 
 ## Demo video
 
-[![Watch the video](https://github.com/dimplekumawat1902/AI-Agventure/blob/main/images/DemoVideo.png)](https://www.youtube.com/watch?v=v3jmYPc0Mu4)  
+[![Watch the video](https://github.com/dimplekumawat1902/AI-Agventure-Final/blob/main/images/DemoVideo.png)](https://www.youtube.com/watch?v=v3jmYPc0Mu4)  
 
 ## Detailed video  
 
-[![Watch the video](https://github.com/dimplekumawat1902/AI-Agventure/blob/main/images/UIVideo.PNG)](https://github.com/dimplekumawat1902/AI-Agventure/blob/main/WebUI_DemoVideo.mp4)
+[![Watch the video](https://github.com/dimplekumawat1902/AI-Agventure-Final/blob/main/images/UIVideo.PNG)](https://github.com/dimplekumawat1902/AI-Agventure-Final/blob/main/WebUI_DemoVideo.mp4)
 
 ## The architecture
 
 The Diagram shows the High Level Design  
-![Video transcription/translation app](https://github.com/dimplekumawat1902/AI-Agventure/blob/main/documents/Architecture_Diagram.PNG)  
+![Video transcription/translation app](https://github.com/dimplekumawat1902/AI-Agventure-Final/blob/main/documents/Architecture_Diagram.PNG)  
 The Diagram shows the weed Detection Process  
-![Video transcription/translation app](https://github.com/dimplekumawat1902/AI-Agventure/blob/main/documents/weed_tensor_flow_diagram.PNG)
+![Video transcription/translation app](https://github.com/dimplekumawat1902/AI-Agventure-Final/blob/main/documents/weed_tensor_flow_diagram.PNG)
 
 1. The user navigates to the site and uploads a video/image file.
 2. The model will predict soil and crop health
@@ -109,7 +109,7 @@ It uses Random Forest algorithm to predict the need of soil irrigation by analys
 The accuracy of model is 94%.
 
 It is a Web based and Android mobile based application which is easily accessible through QR Code.  
-![QRcode](https://github.com/dimplekumawat1902/AI-Agventure/blob/main/MobileApp_code.png)  
+![QRcode](https://github.com/dimplekumawat1902/AI-Agventure-Final/blob/main/QR_code.png)  
 
 ## Project roadmap
 
@@ -134,7 +134,7 @@ It's in a paid IBM Cloud foundary. (Thales company account)
 
 See below for our proposed schedule on next steps after WIT Call for Code 2021 submission.
 
-![Roadmap](https://github.com/dimplekumawat1902/AI-Agventure/blob/main/documents/Product_Roadmap.PNG)
+![Roadmap](https://github.com/dimplekumawat1902/AI-Agventure-Final/blob/main/documents/Product_Roadmap.PNG)
 
 ## Getting started
 The instructions can help you to install the project on you local environment
@@ -150,7 +150,7 @@ Install Python 3.7 or above
 If Pip 21.0 is not available then use get-pip.py and run python get-pip.py  
 
 Clone the repository  
-git clone https://github.com/dimplekumawat1902/AI-Agventure  
+git clone https://github.com/dimplekumawat1902/AI-Agventure-Final
 
 # Run the project  
 Steps cd AI-Quaranteams  
