@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import './_variables.scss';
+@import '../node_modules/font-awesome/scss/font-awesome.scss';
+
+
+html,
+body {
+  height: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  background-color: #DEF3FD;
+}
+
+body {
+  overflow: hidden;
+}

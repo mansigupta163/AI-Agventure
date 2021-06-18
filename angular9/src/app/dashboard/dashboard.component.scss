@@ -1,0 +1,522 @@
+@import './admin.css';
+
+a {
+  color: #080808 !important;
+}
+
+a:hover, a:focus {
+  outline: medium none !important;
+  color: #46c894 !important;
+}
+
+.file {
+  height: 76%;
+  padding: 0 0 0% 3%;
+  width: 79%;
+  margin-top: 6%;
+  box-shadow: 0px 1px 30px 0px rgb(70 200 148 / 25%);
+}
+
+.bttn {
+  background: linear-gradient(to right, rgb(215 159 208) 0%, rgb(141 105 140) 100%);
+border: 2px solid #e1aed7;
+}
+
+.ps {
+  padding-top: 13%;
+}
+
+.pStyle { 
+  margin: 1% 1% 0 1%;
+  text-align: justify;
+  line-height: 1.99;
+}
+
+.matCard {
+  background:linear-gradient(
+    45deg
+    , #f2bebcba, #cdae561f);
+  width: 26%;
+  color: #434343;
+  margin-right: 2%;
+  box-shadow: 0px 2px 6px 0px;
+  text-align: justify;
+}
+
+.analysis {
+  background-color: #e6e6fa;
+  width: 38%;
+  height:15%;
+  margin: 6% 0 0 23%;
+  box-shadow:0px 1px 30px 0px rgb(230 230 250 / 80%);
+}
+
+.mg {
+  background: linear-gradient(45deg
+    , #cdade6a6, #cdae561f);
+  animation-duration: 0.5s; animation-name: slideInUp;
+}
+
+.irr {
+  border-radius: 15px;
+  background: limegreen;
+  width: 72%;
+  margin-left: 13%;
+  padding: 6px;
+  color: whitesmoke;
+}
+
+.irr1 {
+  border-radius: 15px;
+  background: darkorange;
+  width: 79%;
+  margin-left: 13%;
+  padding: 7px;
+  color: whitesmoke;
+}
+
+
+.bg {
+  background: honeydew;
+}
+
+.title {
+  padding: 0 5% 0 5%;
+  width: 100%;
+}
+
+.title-main {
+  padding: 3% 5% 0 5%;
+  width: 100%;
+}
+
+.input-width {
+  width: 18%;
+  padding-right: 4%;
+}
+
+.infoSection {
+  margin-top: 6%;
+}
+
+.list {
+  margin-top: 0%;
+  margin-left: 19%;
+}
+
+.submit {
+  padding: 5px 31px;
+}
+
+.mod2 {
+  margin-top: 2%;
+}
+
+.card {
+  max-width: 417px;
+  margin: 0 2% 2% 4%;
+}
+
+.animation {
+  visibility: visible;
+  animation-duration: 0.9s;
+  animation-name: slideInDown;
+}
+.p-desc {
+  margin-top: 5%;
+  white-space: break-spaces;
+}
+
+.select-image {
+  background: linear-gradient(to right, rgba(117,205,111,1) 0%, rgba(70,200,148,1) 100%);
+  font-size: 16px;
+  padding: 3px;
+  color: white;
+  border:  #46c894;
+  width: 35%;
+  border-radius: 6px;
+  margin-left: 2%;
+  box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
+}
+
+.img {
+  border: 2px solid black;
+  margin: 10% 3% 2% 0;
+  height: 300px;
+  width: 85%;
+}
+
+
+.live-video-track-wrapper .video-container {
+  width: 100%;
+  box-shadow: 0 2px 6px #d0d0d0;
+  overflow: hidden;
+  border: 5px solid #fffcfc;
+  border-radius: 25px 25px 0 0;
+  max-width: 800px;
+}
+
+.bg-fancy {
+  padding: 1rem 0 !important;
+  background: #efefef;
+}
+
+.live-video-track-wrapper .rplr-30 {
+  background: white;
+}
+
+.live-video-track-wrapper .openLocation {
+  padding: 1rem 1.5rem;
+  border: 0;
+  font-size: 1.5rem;
+  color: #636368;
+  margin: 0px auto;
+  display: block;
+  background: #f1f2f5;
+  border-radius: 25px 25px 0 0;
+}
+
+
+.my-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.video-with-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+
+.vdoBg {
+  content: '';
+    position: absolute;
+    background: url(../../assets/images/shap.png);
+    width: 70%;
+    height: 70%;
+    background-repeat: no-repeat;
+    left: 0;
+    top: 41%;
+    -webkit-animation: bounce 2s infinite alternate;
+}
+
+.highlights-area .info-box-icon {
+  display: none;
+}
+
+.irriYEs {
+  display: flex;
+}
+
+.status {
+  margin-left: 23%;
+  margin-top: -9%;
+  margin-bottom: 3%;
+}
+
+.label {
+  background: orange;
+  border-radius: 7px;
+  border: 2px solid orange;
+  padding: 5px 23px;
+}
+
+.highlights-area .info-box-content {
+  margin-left: 15px;
+}
+
+.video-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.ngb-toasts {
+  left: 40%;
+}
+
+.banner.just-anim {
+  padding: 1rem;
+  overflow: auto;
+}
+
+.banner:before {
+  top: 0;
+}
+
+
+$azure-radiance: #029dfc;
+$black: #000000;
+$concrete: #f2f2f2;
+$malibu: #639eff;
+$tundora: #464646;
+
+.c-share {
+  position: absolute;
+  width: 3.4375em;
+  height: 3.4375em;
+  right: 0;
+  top: 0;
+  z-index: 99;
+}
+
+.c-share__input {
+  display: none;
+
+  &.active~ {
+    .c-share__toggler .c-share__icon {
+      transition: 0s;
+      width: 0;
+      height: 0;
+      color: $malibu;
+
+      &::before {
+        transform: rotate(-45deg);
+      }
+
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+
+    .c-share_options {
+      width: 11.0625em;
+      height: 15.5em;
+      border-radius: 0.3125em;
+
+      &::before,
+      li {
+        transition: 0.3s 0.15s;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.c-share__toggler,
+.c-share_options {
+  position: absolute;
+  right: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  background-color: $concrete;
+}
+
+.c-share__toggler {
+  cursor: pointer;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-share__icon {
+  position: relative;
+  left: -0.3125em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  color: $azure-radiance;
+  background-color: currentColor;
+  box-shadow: 0.625em -0.625em, 0.625em 0.625em;
+  transition: 0.1s 0.05s;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 1em;
+    height: 0.125em;
+    background-color: currentColor;
+    transition: 0.1s;
+  }
+
+  &::before {
+    top: 0.1875em;
+    left: 0.1875em;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    top: -0.125em;
+    left: 0.03125em;
+    transform-origin: center;
+    transform: rotate(-45deg);
+  }
+}
+
+.c-share_options {
+  list-style: none;
+  margin: 0;
+  padding: 1.0625em 1.25em;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: 0.2s;
+  box-shadow: 0 0.125em 0.125em rgba($black, 0.3);
+
+  &::before {
+    content: attr(data-title);
+    display: block;
+    margin-bottom: 1.25em;
+    font-weight: 700;
+  }
+
+  li {
+    font-size: 0.875em;
+    color: $tundora;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-bottom: 0.75em;
+    }
+  }
+
+  &::before,
+  li {
+    opacity: 0;
+    transform: translateY(0.625em);
+    transition: 0s;
+  }
+}
+
+.cropImg {
+    padding-left: 11%;
+}
+
+.vd {
+  margin:2% 0 4% -2%;
+  width: 99%;
+  height: 85%;
+}
+
+.createAlertOverlay {
+
+  .new-location-wrapper {
+    max-height: 300px;
+    padding: 2rem;
+    box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
+  }
+  /* FORM */
+
+  .form .plan input,
+  .form .payment-plan input,
+  .form .payment-type input {
+    display: none;
+  }
+
+  .form label {
+    position: relative;
+    color: #fff;
+    background-color: #9E9E9E;
+    font-size: 21px;
+    text-align: center;
+    line-height: 37px;
+    display: block;
+    cursor: pointer;
+    border: 3px solid transparent;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 41px;
+    margin-right: 18px;
+  }
+
+
+  .btn {
+    width: 100%;
+    font-size: 23px;
+    padding: 5px 14px;
+    border-radius:19px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .iq-contactbox .contact-bg {
+
+    margin: 1rem 0;
+  }
+
+  .form-control {
+    font-size: 23px;
+  }
+
+  .plan {
+    display: flex;
+  }
+}
+
+#video-details {
+  font-size: 11px;
+  color: #aba2a2;
+  text-align: center;
+}
+
+.highcharts-figure, .highcharts-data-table table {
+  min-width: 320px; 
+  max-width: 660px;
+  margin: 1em auto;
+}
+
+.highcharts-data-table table {
+font-family: Verdana, sans-serif;
+border-collapse: collapse;
+border: 1px solid #EBEBEB;
+margin: 10px auto;
+text-align: center;
+width: 100%;
+max-width: 500px;
+}
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+.highcharts-data-table th {
+font-weight: 600;
+  padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
+
+.drag-area-hr {
+  position: relative;
+  input[type='file'] {
+    color: transparent;
+  }
+
+  label[for='file'] {
+    position: absolute;
+    top: 38%;
+    left: 39%;
+  }
+
+  .drag-enable-container {
+    padding: 10%;
+    width: 105%;
+    border: 2px dashed #ccc;
+    background: #f5f5f5;
+    color: #000;
+  }
+
+}
+
+

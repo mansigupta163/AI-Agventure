@@ -1,0 +1,876 @@
+<app-toasts></app-toasts>
+
+<div class="change-location-wrapper" style="margin-right: 4%;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center mt-2">
+                <button type="button" class="change-location button" (click)="shareNow($event)">
+                    Download as PDF</button>
+                <mat-form-field style="margin-top: 3%;" appearance="fill">
+                    <mat-label>Select Language</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let lan of languages" [value]="lan.value">
+                            {{lan.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="overlay-wrapper changeLocationOverlay" [ngClass]='isChangeLocation ? "show-popup" : ""'>
+        <div class="new-location-wrapper" style="max-height: 55%;">
+            <span id="close-it" (click)="closeChangeLocationPopup()">X</span>
+
+            <h3>Choose location (<em>{{selectedArea.locality}}</em>)</h3>
+            <div class="row">
+                <div class="col-sm-9">
+                    <select class="form-control" id="locationName" [(ngModel)]="selectedArea.locality">
+                        <option *ngFor="let area of areaData" value="{{ area.locality }}">
+                            {{ area.locality }}</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-secondary" id="updateLocation"
+                        (click)="changeLocation()">Go</button>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <iframe class="w-100"
+                    src="https://maps.google.com/maps?q='+latitude+','+longitude+'&hl=en&z=10&amp;output=embed"
+                    style="margin-top: 26px; margin-left: -3%;border: 1px solid cadetblue;height: 287px;"
+                    allowfullscreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- change location end here -->
+    <div class="overlay-wrapper createAlertOverlay" [ngClass]='isWaterAlert ? "show-popup" : ""'>
+        <div class="new-location-wrapper">
+            <span id="close-it" (click)="closeIrrigationPopup()">X</span>
+            <h3>Irrigation Details</h3>
+            <hr>
+            <p style="margin-top: 3%;">Provide Crop Name : </p>
+            <form class="example-form" style="margin: -15% 0px 0px 42%;">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Crop Name</mat-label>
+                    <input matInput placeholder="Ex. Rice">
+                </mat-form-field>
+            </form>
+
+            <p style="margin-top: 3%;">Has your land been irrigated within the last 2 days ?</p>
+
+            <div class="list">
+                <div class="form">
+                    <div class="plan cf">
+                        <input type="radio" name="violationLevel" [(ngModel)]="violationLevel" id="violationLevel1"
+                            (click)="createWaterTrueAlert()" [value]="true"><label class="button"
+                            for="violationLevel1">Yes</label>
+                        <input type="radio" name="violationLevel" [(ngModel)]="violationLevel" id="violationLevel2"
+                            (click)="createWaterFalseAlert()" [value]="false"><label class="button"
+                            for="violationLevel2">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay-wrapper createAlertOverlay" [ngClass]='isCreateAlert ? "show-popup" : ""'>
+        <div class="new-location-wrapper">
+            <span id="close-it" (click)="closeCreateAlertPopup()">X</span>
+            <h3>Soil Composition Details</h3>
+            <p>Get the soil specific output by providing your soil composition (Nitrogen , Phosphorus, Potassium, Ph
+                content) </p>
+
+            <div class="list">
+                <div class="form">
+                    <div class="plan cf">
+                        <input type="radio" name="cropAlert" [(ngModel)]="violationLevel" id="cropAlert1"
+                            (click)="createTrueAlert()" [value]="true"><label class="button"
+                            for="cropAlert1">Yes</label>
+                        <input type="radio" name="cropAlert" [(ngModel)]="violationLevel" id="cropAlert2"
+                            (click)="createFalseAlert()" [value]="false"><label class="button"
+                            for="cropAlert2">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- change location end here -->
+
+</div>
+
+<!-- Crop Weed Detection section -->
+<div class="row">
+    <div class="title">
+        <!-- <h3 class="mt-3 font-weight-bold" style="margin-bottom: 2%;">
+            Crop Issue Detection and Recommendations</h3> -->
+        <div class="row" [ngClass]="{'infoSection': img === true}" id="myId">
+            <div class="col-lg-4 col-md-4 bg">
+                <div class="rplr-30">
+                    <div class="future-services services text-center wow slideInUp" data-wow-duration="0.5s"
+                        style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
+                        <div class="future-img" *ngIf="img">
+                            <img src="../../assets/images/24.jpg" class="img-fluid mb-4" alt="">
+                        </div>
+                        <button class="button btn animation" (click)="openCreateAlertPopup()">Crop
+                            Recommendation</button>
+                        <p *ngIf="img" class="mb-0 p-desc">Get an exhaustive plan to have 20% more yield from the best
+                            crop for
+                            your farm with green practices.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 bg">
+                <div class="rplr-30">
+                    <div class="future-services services text-center wow slideInUp" data-wow-duration="1s"
+                        style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
+                        <div class="future-img" *ngIf="img">
+                            <img src="../../assets/images/22.jpg" class="img-fluid mb-4" alt="">
+                        </div>
+                        <button class="button btn animation active" (click)="module1()">Crop Health</button>
+
+                        <p *ngIf="img" class="mb-0 p-desc">Click here to view the overall health status of your farm and
+                            the
+                            suggestive organic cure just by uploading recent images and videos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 bg">
+                <div class="rplr-30">
+                    <div class="future-services services text-center wow slideInUp" data-wow-duration="1.5s"
+                        style="visibility: visible; animation-duration: 1.5s; animation-name: slideInUp;">
+                        <div class="future-img" *ngIf="img">
+                            <img src="../../assets/images/23.jpg" class="img-fluid mb-4" alt="">
+                        </div>
+                        <button class="button btn animation" (click)="openIrrigationPopup()">Irrigation
+                            Guidance</button>
+                        <p *ngIf="img" class="mb-0 p-desc">Click here to know the irrigation need of your farm for the
+                            next 7
+                            days based on the weather forecast.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <span>
+            <div style="display: flex; flex-direction: row;">
+                <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+                    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+                </button> -->
+                <!-- <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                    <mat-step [stepControl]="firstFormGroup">
+                        <form [formGroup]="firstFormGroup">
+                            <ng-template matStepLabel>Fill out your name</ng-template>
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Last name, First name" formControlName="firstCtrl"
+                                    required>
+                            </mat-form-field>
+                            <div>
+                                <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+                        <form [formGroup]="secondFormGroup">
+                            <mat-form-field>
+                                <mat-label>Address</mat-label>
+                                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                                    required>
+                            </mat-form-field>
+                            <div>
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step>
+                        <ng-template matStepLabel>Done</ng-template>
+                        <p>You are now done.</p>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button (click)="stepper.reset()">Reset</button>
+                        </div>
+                    </mat-step>
+                </mat-horizontal-stepper> -->
+
+                <div *ngIf="mod1" style="width:49%; margin-top: 1%;">
+                    <span>
+                        <h6 style="display: inline-block;"> Upload/Drag drop image or video of your crop</h6>
+                        <input (input)="getCount()" type='file' class="select-image  drag-area-hr drag-enable-container"
+                            (change)="onSelectFile($event)" />
+                        <!-- <span class="drag-area-hr">
+                            <input (input)="getCount()" type='file' class="select-image drag-enable-container"
+                                (change)="onSelectFile($event)" />
+                            <label for="file">Or Drag Images</label>
+                        </span> -->
+
+                    </span>
+
+                    <div class="file" *ngIf="url && !detect">
+                        <img class="video-container animate__animated animate__zoomIn cropImg" [src]="url"
+                            *ngIf="format==='image' && url" height="400">
+                        <video class="video-container animate__animated animate__zoomIn vd" [src]="url"
+                            *ngIf="format==='video' && url" height="400" autoplay></video>
+                    </div>
+                    <div class="file" *ngIf="url && detect">
+                        <img class="video-container animate__animated animate__zoomIn cropImg"
+                            src="../../assets/images/cropOutput1.jpg" *ngIf="format==='image' && url" height="400">
+
+                        <video class="video-container animate__animated animate__zoomIn vd"
+                            src="../../assets/video/crpOutput.mp4" *ngIf="format==='video' && url" height="500"
+                            autoplay></video>
+                    </div>
+                    <button *ngIf="url" class="button" style="display: block;margin:3px 0px 0px 26%;"
+                        (click)="analyze()" [ngStyle]="{visibility:detect  ? 'hidden' : 'visible' }">Analyze</button>
+                    <ngx-spinner bdColor=" rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-loader"
+                        [fullScreen]="true">
+                        <p style="color: white"> Analyzing Data ... </p>
+                    </ngx-spinner>
+                </div>
+
+                <div  class="file" *ngIf="detect && mod1 && count"
+                     style="box-shadow: 0px 1px 30px 0px rgb(70 200 148 /25%);margin-top:81px;width: 47%;">
+
+                    <highcharts-chart [Highcharts]="Highcharts" [options]="pieChart1">
+                    </highcharts-chart>
+                </div>
+                <div  class="file" *ngIf="detect && mod1 && !count"
+                     style="box-shadow: 0px 1px 30px 0px rgb(70 200 148 /25%);margin-top:81px;width: 47%;">
+                    <h6 class="status" *ngIf="detect && mod1 && !count">Fire Prone Area : <label class="label">
+                            {{this.leafStatus}} </label></h6>
+                    <highcharts-chart [Highcharts]="Highcharts" [options]="pieChart2">
+                    </highcharts-chart>
+                </div>
+            </div>
+
+            <mat-accordion *ngIf="detect && mod1 && count">
+                <mat-expansion-panel (opened)="goToBottom()" (closed)="panelOpenState = false" style="margin-top: 14px;
+                    padding: 13px;background: linear-gradient(45deg, #cdade6a6, #5689cd6b);
+    box-shadow: 0px 1px 30px 0px rgb(70 194 200 / 21%);
+    background-color: linear-grad;
+    color: #434343;">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <h4> Cultural methods of Weed Treatment</h4>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <h6> Click here to look for the cultural methods of Weed Treatment</h6>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div style="display: flex; margin-top: 4%;
+            margin-left: -2%;">
+                        <mat-card class="card">
+                            <mat-card-header>
+                                <mat-card-title>Buried Drip Irrigation</mat-card-title>
+                                <mat-card-subtitle>Eradicate water access to weeds</mat-card-subtitle>
+                            </mat-card-header>
+                            <img mat-card-image src="../../assets/images/drip.jpg" alt="Photo of Crop" style="
+                                height: 249px;">
+                            <mat-card-content>
+                                <p style="line-height: 1.9; text-align: justify;">
+                                    Buried drip irrigation involves burying drip tape in the subsurface near the
+                                    planting bed, thereby limiting weeds access to water while also allowing crops to
+                                    obtain moisture. It is most effective during dry periods.
+                                </p>
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-card class="card">
+                            <mat-card-header>
+                                <mat-card-title>Stale Seed Bed</mat-card-title>
+                                <mat-card-subtitle>Weed treatment manual technique</mat-card-subtitle>
+                            </mat-card-header>
+                            <img mat-card-image src="../../assets/images/seedBed.jpg" alt="Photo of Crop" style="
+                                height: 249px;">
+                            <mat-card-content>
+                                <p style="line-height: 1.9; text-align: justify;">
+                                    Stale seed bed is a manual technique which involves cultivating the soil, then
+                                    leaving
+                                    it fallow for a week or so. When the initial weeds sprout, the grower lightly
+                                    hoes
+                                    them
+                                    away before planting the desired crop. However, even a freshly cleared bed is
+                                    susceptible to airborne seed from elsewhere, as well as seed carried by passing
+                                    animals
+                                    on their fur, or from imported manure.
+                                </p>
+                            </mat-card-content>
+                        </mat-card>
+                        <mat-card class="card">
+                            <mat-card-header>
+                                <mat-card-title>Crop Rotation</mat-card-title>
+                                <mat-card-subtitle>Remove Weeds though crop rotation</mat-card-subtitle>
+                            </mat-card-header>
+                            <img mat-card-image src="../../assets/images/crpRotation.jpg" alt="Photo of Crop" style="
+                                height: 249px;">
+                            <mat-card-content>
+                                <p style="line-height: 1.9; text-align: justify;">
+                                    Rotating crops with ones that kill weeds by choking them out, such as hemp, Mucuna
+                                    pruriens, and other crops, can be a very effective method of weed control. It is a
+                                    way to avoid the use of herbicides, and to gain the benefits of crop rotation.</p>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </mat-expansion-panel>
+
+            </mat-accordion>
+            <div *ngIf="detect && mod1 && !count" style="display: flex; margin-top: -2%;
+            margin-left: 0;">
+                <mat-card class="card">
+                    <mat-card-header>
+                        <mat-card-title>Disease Cause</mat-card-title>
+                        <mat-card-subtitle>Crop Disease Probable Causes</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src="../../assets/images/cause.png" alt="Photo of Crop" style="
+                        height: 249px;">
+                    <mat-card-content>
+                        <hr>
+                        <p style="text-align: justify;font-weight: 500;">
+                            1. Apple scab overwinters primarily in fallen leaves and in the soil. Disease
+                            development is
+                            favored by wet, cool weather that generally occurs in spring and early summer.<br /> 2.
+                            Fungal spores are carried by wind, rain or splashing water from the ground to flowers,
+                            leaves or fruit. During damp or rainy periods, newly opening apple leaves are extremely
+                            susceptible to infection. The longer the leaves remain wet, the more severe the
+                            infection
+                            will be. Apple scab spreads rapidly between 55-75 degrees Fahrenheit.
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="card">
+                    <mat-card-header>
+                        <mat-card-title>Disease Cure</mat-card-title>
+                        <mat-card-subtitle>Crop Disease Suggested Cure</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src="../../assets/images/cure.png" alt="Photo of Crop" style="
+                        height: 249px;">
+                    <mat-card-content>
+                        <hr>
+                        <p style="text-align: justify;font-weight: 500;">
+                            1. Choose resistant varieties when possible.<br />2. Rake under
+                            trees and destroy
+                            infected
+                            leaves to reduce the number of fungal spores available to start the disease cycle over
+                            again
+                            next spring<br />3. Water in the evening or early morning hours (avoid overhead
+                            irrigation)
+                            to give the leaves time to dry out before infection can occur.<br />4. Spread a 3- to
+                            6-inch
+                            layer of compost under trees, keeping it away from the trunk, to cover soil and prevent
+                            splash dispersal of the fungal spores.
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="card" style="width: 35%;-webkit-animation: bounce 2s infinite alternate">
+                    <mat-card-header>
+                        <mat-card-title>Provide Feedback </mat-card-title>
+                        <mat-card-subtitle>Your feedback is valuable to us</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src="../../assets/images/fb.png" alt="Photo of Crop" style="
+                        height: 249px;">
+                    <mat-card-content>
+                        <div class="contact-box">
+                            <h6 style="text-align: center;"><i>Not Satified with the Analysis ? </i></h6>
+                            <h6 style="text-align: center;"><i>Submit Feedback !!</i></h6>
+                            <form class="p-0" id="contact">
+                                <div class="contact-form mt-4">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-12 mb-3">
+                                            <div class="form-group section-field textarea wow fadeInUp"
+                                                data-wow-duration="2.5s"
+                                                style="visibility: visible; animation-duration: 2.5s; animation-name: fadeInUp;">
+                                                <label class="mb-2">Feedback</label>
+                                                <textarea class="input-message w-100" name="message" id="message"
+                                                    placeholder="Type Your Feedback Here" rows="5"></textarea>
+                                            </div>
+                                            <div class="section-field iq-mt-20">
+                                                <div class="g-recaptcha"
+                                                    data-sitekey="6LdA3mYUAAAAANpUuZTLbKM_s23tTHlcdJ7dYfgI"></div>
+                                            </div>
+                                            <input type="hidden" name="action" value="sendEmail">
+                                            <button id="submit" class="button" name="submit" type="submit" value="Send"
+                                                class="button pull-right wow fadeInUp" data-wow-duration="1.0s"
+                                                style="margin-right: 25%;visibility: visible; animation-duration: 1s; animation-name: fadeInUp;">Submit
+                                                Feedback</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <!-- <div *ngIf=" mod1 && !detect && !url"
+                class="highlights-area col-sm-12 col-lg-2 animate__animated animate__bounce" style="left:0; ">
+                <div class="row" style="width: 393%;margin-top: 37%;">
+                    <div class="col-sm-12">
+                        <div class="info-box animate__animated animate__slideInLeft animate__delay-1s"
+                            style="box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);color: #fff;background:#2AAA8A">
+                            <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-number">Seedling root dip</span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    This method is used for transplanted crops. Five packets (1.0 kg) of the inoculants
+                                    are required for one ha and mixed with 40 litres of water. The root portion of the
+                                    seedlings is dipped in the solutions for 5 to 10 minutes and then transplanted.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-box animate__animated animate__slideInLeft animate__delay-2s"
+                            style="box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);background:#2AAA8A;color: #fff;">
+                            <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-number">Soil treatment</span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    4 kg each of the recommended biofertilizers are mixed in 200 kg of compost and kept
+                                    overnight. This mixture is incorporated in the soil at the time of sowing or
+                                    planting.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-box animate__animated animate__slideInLeft animate__delay-3s"
+                            style="box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);background:#2AAA8A;color: #fff;">
+                            <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-number">Seed treatment</span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                                <span class="progress-description">
+                                    Each packet (200g) of inoculant is mixed with 200 ml of rice gruel or jaggery
+                                    solution. The seeds required for one hectre are mixed in the slurry so as to have
+                                    uniform coating of the inoculants over the seeds and then shade dried for 30
+                                    minutes.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <img *ngIf=" mod1 && !detect && !url" mat-card-image src="../../assets/images/did.jpg" alt="Photo of Crop"
+                style="height: 79px;
+            width: 18%;
+            margin: 1% 0 0 3%;">
+            <span *ngIf=" mod1 && !detect && !url" style="height: 60%;width: 70%;
+            display: flex;
+            margin: 1% 2% 0 1%;">
+                <mat-card class="matCard mg" style="animation-duration: 0.5s; animation-name: slideInUp;">
+                    <h5>Seedling root dip</h5>
+                    <hr>
+                    <p class="pStyle">This method is used for transplanted crops. Five packets (1.0 kg) of the
+                        inoculants
+                        are required for one ha and mixed with 40 litres of water. The root portion of the
+                        seedlings is dipped in the solutions for 5 to 10 minutes and then transplanted.
+                    </p>
+                </mat-card>
+                <mat-card class="matCard" style="animation-duration: 1s; animation-name: slideInUp;">
+                    <h5>Soil treatment</h5>
+                    <hr>
+                    <p class="pStyle">4 kg each of the recommended biofertilizers are mixed in 200 kg of compost and
+                        kept overnight. This mixture is incorporated in the soil at the time of sowing or planting
+
+                    </p>
+                </mat-card>
+                <mat-card class="matCard mg" style="background:linear-gradient( 
+                        45deg
+                         , #9fc4f2ba, #cdae561f);animation-duration: 1.5s; animation-name: slideInUp;">
+                    <h5>Seed treatment</h5>
+                    <hr>
+                    <p class="pStyle">Each packet(200g) of inoculant is mixed with 200 ml of rice gruel/jaggery
+                        solution.The seeds required for one hectre are mixed in slurry so as to have uniform
+                        coating of the inoculants over the seeds. The treated seeds
+                        should be used within 24 hours.
+                    </p>
+                </mat-card>
+            </span>
+
+
+
+            <div _ngcontent-utm-c104="" *ngIf="mod1 && !detect && !url" class="wow fadeInRight"
+                style="visibility: visible; animation-duration: 1.30s; animation-name: fadeInRight; margin-top: -30%;margin-left: 59%;">
+                <img _ngcontent-utm-c104="" src="../../assets/images/lap.png" alt="img" class="img-fluid banner-person">
+            </div>
+        </span>
+        <div *ngIf="cropRecommend">
+            <div class="mod2">
+                <form class="input-form">
+                    <mat-form-field class="input-width">
+                        <mat-label>Nitrogen Content</mat-label>
+                        <input matInput placeholder="Ex. 20%">
+                    </mat-form-field>
+                    <mat-form-field class="input-width">
+                        <mat-label>Phosphorus Content</mat-label>
+                        <input matInput placeholder="Ex. 50%">
+                    </mat-form-field>
+                    <mat-form-field class="input-width">
+                        <mat-label>Potassium Content</mat-label>
+                        <input matInput placeholder="Ex. 30%">
+                    </mat-form-field>
+                    <mat-form-field class="input-width">
+                        <mat-label>Ph Value</mat-label>
+                        <input matInput placeholder="Ex. 5">
+                    </mat-form-field>
+                    <span>
+                        <button class="button submit" (click)="submit()">Submit</button>
+                    </span>
+                </form>
+                <span style="display: flex;margin: 1% 2% 0 2%;">
+                    <mat-card class="matCard mg" style="height: fit-content;">
+                        <img mat-card-image src="../../assets/images/did.jpg" alt="Photo of Crop" style="height: 79px;
+                            width: 95%;
+                            padding: 0 0 0 14%;">
+                        <p class="pStyle">For transplanted rice, suggestion is to dip the roots of seedlings for
+                            8 to 10 hours
+                            in a solution of Azospirillum + Phosphotika at 5 kg each per ha.
+                        </p>
+                        <hr>
+                        <p>
+                            Azotobacter + Phosphotika at 200 gm each per 10 kg of seed as seed treatment are useful for
+                            wheat, sorghum, maize, cotton, mustard etc.
+                        </p>
+
+                    </mat-card>
+                    <mat-card class="matCard"
+                        style="animation-duration: 0.5s; animation-name: slideInDown;height: 396px;">
+                        <img mat-card-image src="../../assets/images/did.jpg" alt="Photo of Crop" style="height: 79px;
+                        width: 95%;
+                        padding: 0 0 0 14%;">
+                        <p class="pStyle ps">Rhizobium + Phosphotika at 200 gm each per 10 kg of seed as seed treatment
+                            are recommended for pulses such as pigeonpea, green gram, black gram, cowpea etc, groundnut
+                            and soybean.
+                        </p>
+                    </mat-card>
+                    <video class="video-container vd" src="../../assets/video/video1.mp4" style="height: 29%;
+                    width: 49%;
+                    margin-left: 3%;
+                    margin-top:0%;
+                    box-shadow: 0px 1px 30px 0px rgb(224 187 228 / 100%);" height="400" autoplay></video>
+                </span>
+
+            </div>
+        </div>
+        <div *ngIf="isPost">
+            <hr />
+            <div style="display: flex;">
+                <section class="how-it-works conection-shap" style="height: 91%;">
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="future-services text-center wow slideInUp" data-wow-duration="0.5s"
+                                style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/34.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Recommendation Crop</h4>
+                                <p class="mb-0"><b> {{this.crop}}</b> is the best suitable crop for the specified soil
+                                    composition.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="future-services text-center wow slideInUp" data-wow-duration="1s"
+                                style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/35.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Recommended Bio-Fertilizer</h4>
+                                <p class="mb-0"><b> {{this.fertilizer}}</b> is the best suitable Bio-Fertilizer for the
+                                    specified soil
+                                    composition.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="future-services text-center wow slideInUp" data-wow-duration="1.5s"
+                                style="visibility: visible; animation-duration: 1.5s; animation-name: slideInUp;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/34.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Recommended Inter-Crop</h4>
+                                <p class="mb-0"><b>{{this.interCrop}} </b> is the most appropriate inter crop for
+                                    maximum yield.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            <div *ngIf="mod3" style="width:33%;">
+                <span>
+                    <h6 style="display: inline-block;"> Provide Nearest Location </h6>
+                    <button type="button" class="change-location button" (click)="openChangeLocationPopup()">Change
+                        location</button>
+                </span>
+                <div class="row" style="width: 149%;margin-top: 4%;">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="rplr-30">
+                            <div class="future-services services text-center wow slideInUp" data-wow-duration="0.5s"
+                                style="visibility: visible; animation-duration: 0.5s; animation-name: slideInDown;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/crp1.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Cauliflower</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="rplr-30">
+                            <div class="future-services services text-center wow slideInUp" data-wow-duration="1s"
+                                style="visibility: visible; animation-duration: 1s; animation-name: slideInDown;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/crp2.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Carrot</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="rplr-30">
+                            <div class="future-services services text-center wow slideInUp" data-wow-duration="1.5s"
+                                style="visibility: visible; animation-duration: 1.5s; animation-name: slideInDown;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/crp3.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Bottle Gourd</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="rplr-30">
+                            <div class="future-services services text-center wow slideInUp" data-wow-duration="0.5s"
+                                style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/crp4.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Potato</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="rplr-30">
+                            <div class="future-services services text-center wow slideInUp" data-wow-duration="1s"
+                                style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/crp5.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Orange</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="rplr-30">
+                            <div class="future-services services text-center wow slideInUp" data-wow-duration="1.5s"
+                                style="visibility: visible; animation-duration: 1.5s; animation-name: slideInUp;">
+                                <div class="future-img">
+                                    <img src="../../assets/images/crp6.jpg" class="img-fluid mb-4" alt="">
+                                </div>
+                                <h4 class="mb-3">Peas & beans</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <mat-card *ngIf="mod3" class="matCard analysis">
+                <div style="display: flex;animation-duration: 1s;animation-name: slideInDown;">
+                    <i class=" fa fa-search" style="padding-left:10%;width:20%;font-size: 5rem;" aria-hidden="true"></i>
+                    <h4 style="    font-size: 41px;
+                    width: 70%;
+                    margin-top: 2%;
+                    margin-left: 3%;
+                "> Analysis Based On </h4>
+                </div>
+                <span class="pStyle">
+                    <h5 style="margin-top: 5%;
+                    margin-left: 10%;animation-duration: 1s;animation-name: fadeInRight;"> •
+                        &nbsp; &nbsp;Average Rainfall</h5>
+                    <h5 style="margin-top: 5%;
+                    margin-left: 10%; animation-duration: 1.5s; animation-name: fadeInRight;"> •
+                        &nbsp; &nbsp;Average Soil Moisture</h5>
+                    <h5 style="margin-top: 5%;
+                    margin-left: 10%; animation-duration: 2s; animation-name: fadeInRight;"> •
+                        &nbsp; &nbsp;Wind Speed</h5>
+                    <h5 style="margin-top: 5%;
+                    margin-left: 10%; animation-duration: 2.5s; animation-name: fadeInRight;"> •
+                        &nbsp; &nbsp;Soil Type of your Area</h5>
+                </span>
+            </mat-card>
+        </div>
+
+        <div class="irriYes" *ngIf="sec3 && waterInfo && !cropRecommend && !isPost && !mod1 &&!mod3">
+            <div style="width:30%;margin: 0 0 0 2%;">
+                <div class="future-services services text-center wow slideInUp" data-wow-duration="1s"
+                    style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;margin-top: 13%">
+                    <div class="future-img">
+                        <img src="../../assets/images/irri.png" class="img-fluid mb-4" alt="">
+                    </div>
+                    <h5 class="mb-3 irr">{{this.irrigation}}</h5>
+                    <h6
+                        style="background-color: crimson;color:whitesmoke; animation-duration: 1s; animation-name: slideInLeft;padding:1%">
+                        You have to provide 2 L/m<sup>2</sup>of irrigation</h6>
+                    <br />
+                    <p class=" mb-0"> Considering the good amount of Rainfall for next 7 days Low Irrigation is
+                        recommended</p>
+                </div>
+            </div>
+            <div style="box-shadow: 0px 1px 30px 0px rgb(70 200 148 / 25%);
+            border: 2px solid black;margin-top: -22%;margin-left: 33%;width: 63%;">
+                <highcharts-chart [Highcharts]=" Highcharts" [options]="selectedLineChart"
+                    style="width: 100%; height: 400px; display: block;">
+                </highcharts-chart>
+            </div>
+            <div style="display: flex; margin-top: 3%;
+            margin-left: -2%;">
+                <mat-card class="card mg" style="max-width: 44%;
+                width: 40%;
+                margin-left: 7%">
+                    <mat-card-header style="margin-left:28%">
+                        <mat-card-title>
+                            <span>
+                                <h5 style="font-weight: 700;">Analysis Based On</h5>
+
+                            </span>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="pStyle">
+                        <h5 style="margin-top: 5%;
+                            margin-left: 10%;animation-duration: 2s; animation-name: slideInLeft;"> •
+                            &nbsp; &nbsp;<i>Weather Conditions for next 7 days</i></h5>
+                        <h5 style="margin-top: 5%;
+                            margin-left: 10%;animation-duration: 2.5s; animation-name: slideInLeft;"> •
+                            &nbsp; &nbsp;<i>Location/Area</i></h5>
+                        <h5 style="margin-top: 5%;
+                            margin-left: 10%;animation-duration: 3s; animation-name: slideInLeft;"> •
+                            &nbsp; &nbsp;<i>Wind Speed</i></h5>
+                        <h5 style="margin-top: 5%;animation-duration: 3.5s; animation-name: slideInLeft;
+                            margin-left: 10%;"> •
+                            &nbsp; &nbsp;<i>Soil Type of your Area</i></h5>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="card mg" style="max-width: 44%;width: 40%;">
+                    <mat-card-header>
+                        <mat-card-title>Tips to Healthy Irrigation</mat-card-title>
+                        <mat-card-subtitle>Follow these tips to have healthy irrigated land</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content style="text-align: justify;font-weight: 500;">
+                        <hr>
+                        <p>Watering with drip irrigation instead of the traditional
+                            overhead spray method
+                            can decrease evaporation and save up to 80 percent more water. It also ensure that the
+                            water
+                            gets to the plants’ roots, which can lead to better growth.
+                        </p>
+                        <p>After pre-irrigation, later irrigations depend on soil, weather,
+                            and the crop.
+                        </p>
+                        <p>Coarse or sandy soil needs water more often than loam, silt, and
+                            most clay.
+                        </p>
+                        <p>Soil dries out faster when the weather warms up.
+
+                        </p>
+                        <p>Wind speeds up soil drying.
+
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <div class="irriYes" *ngIf="sec3 && !waterInfo && !cropRecommend && !isPost && !mod1 && !mod3">
+            <div style="width:30%;margin: 2% 0 0 2%;">
+                <div class="future-services services text-center wow slideInUp" data-wow-duration="1s"
+                    style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;margin-top: 13%">
+                    <div class="future-img">
+                        <img src="../../assets/images/irri.png" class="img-fluid mb-4" alt="">
+                    </div>
+                    <h5 class="mb-3 irr1">{{this.irrigation1}}</h5>
+                    <h6
+                        style="background-color: orangered;color:whitesmoke; animation-duration: 1s; animation-name: slideInLeft;padding:1%">
+                        You have to provide 5 L/m<sup>2</sup>of irrigation</h6>
+                    <br />
+                    <p class="mb-0"> Considering the good amount of Rainfall for next 7 days Medium Irrigation is
+                        recommended</p>
+                </div>
+            </div>
+            <div style="box-shadow: 0px 1px 30px 0px rgb(70 200 148 / 25%);
+            border: 2px solid black;margin-top: -21%;margin-left: 33%;width: 63%;">
+                <highcharts-chart [Highcharts]=" Highcharts" [options]="selectedLineChart"
+                    style="width: 100%; height: 400px; display: block;">
+                </highcharts-chart>
+            </div>
+            <div style="display: flex; margin-top: 3%;
+            margin-left: -2%;">
+                <mat-card class="card" style="background: aliceblue;max-width: 44%; width: 40%;margin-left: 7%;">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <span>
+                                <h5 style="font-weight: 700;">Analysis Based On</h5>
+                            </span>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <span class="pStyle">
+                            <h5 style="margin-top: 5%;
+                            margin-left: 10%;"> •
+                                &nbsp; &nbsp;<i>Weather Conditions for next 7 days</i></h5>
+                            <h5 style="margin-top: 5%;
+                            margin-left: 10%;"> •
+                                &nbsp; &nbsp;<i>Location/Area</i></h5>
+                            <h5 style="margin-top: 5%;
+                            margin-left: 10%;"> •
+                                &nbsp; &nbsp;<i>Wind Speed</i></h5>
+                            <h5 style="margin-top: 5%;
+                            margin-left: 10%;"> •
+                                &nbsp; &nbsp;<i>Soil Type of your Area</i></h5>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="card" style="max-width: 44%;width: 40%;background: aliceblue;">
+                    <mat-card-header>
+                        <mat-card-title>Tips to Healthy Irrigation</mat-card-title>
+                        <mat-card-subtitle>Follow these tips to have healthy irrigated land</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content style="text-align: justify;font-weight: 500;">
+                        <hr>
+                        <p>Watering with drip irrigation instead of the traditional
+                            overhead spray method
+                            can decrease evaporation and save up to 80 percent more water. It also ensure that the water
+                            gets to the plants’ roots, which can lead to better growth.
+                        </p>
+                        <p>After pre-irrigation, later irrigations depend on soil, weather,
+                            and the crop.
+                        </p>
+                        <p>Coarse or sandy soil needs water more often than loam, silt, and
+                            most clay.
+                        </p>
+                        <p>Soil dries out faster when the weather warms up.
+
+                        </p>
+                        <p>Wind speeds up soil drying.
+
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Video Section -->

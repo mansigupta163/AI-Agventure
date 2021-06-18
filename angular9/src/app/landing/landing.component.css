@@ -1,0 +1,23 @@
+.live-video-track-wrapper {
+  background: url(../../assets/images/ai-bg.jpg) no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.live-video-track-wrapper .video-container {
+  height: 500px;
+  width: 100%;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+  border: 5px solid #fffcfc;
+  border-radius: 25px 25px 0 0;
+}
+
+.bg-fancy {
+  padding-top: 1rem 0;
+  background: #efefef;
+}
+
+.live-video-track-wrapper .rplr-30 {
+  background: white;
+}

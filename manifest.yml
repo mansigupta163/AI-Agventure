@@ -1,0 +1,9 @@
+---
+applications:
+- name: pythontoolchain-20210617080845201
+  timeout: 300
+  memory: 1GB
+  disk_quota: 2GB
+  random-route: true
+  set-health-check: http
+

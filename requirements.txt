@@ -1,0 +1,9 @@
+Flask
+pandas
+numpy==1.19.2
+sklearn
+matplotlib
+requests
+geopy
+paho-mqtt
+opencv-python-headless==4.2.0.34

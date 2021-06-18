@@ -1,0 +1,5 @@
+<!-- <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+      (dragEnd)="markerDragEnd($event)"></agm-marker>
+  </agm-map> -->
+<app-login-page *ngIf="isLoggedIn" [latitude]="latitude" [longitude]="longitude" ></app-login-page>
