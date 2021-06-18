@@ -169,7 +169,9 @@ Now the website will use the API services to show data on Web UI/Mobile UI
 You can find a running backend system to test at [pythontoolchain-20210617080845201-forgiving-fox.us-east.mybluemix.net](http://pythontoolchain-20210617080845201-forgiving-fox.us-east.mybluemix.net)  
 you can find frontend UI to test at [testtoolchaingroup.us-east.mybluemix.net]( https://testtoolchaingroup.us-east.mybluemix.net/)  
 
-## Built with paid IBM Cloud
+## Built with
+
+The project is built using following IBM services with paid IBM cloud.
 
 - [IBM Cloud Foundry](https://www.cloudfoundry.org/the-foundry/ibm-cloud-foundry/) - To deploy UI and python backend
 - [IBM Angular API](https://developer.ibm.com/technologies/web-development/tutorials/wa-implement-a-single-page-application-with-angular2/)- The web framework used
