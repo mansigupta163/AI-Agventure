@@ -171,11 +171,11 @@ you can find frontend UI to test at [testtoolchaingroup.us-east.mybluemix.net]( 
 
 ## Built with
 
-- [IBM Cloud Foundry]() - To deploy UI and python backend
-- [IBM Angular API]()- The web framework used
-- [IBM Watson Studio]() - Data Preparation
-- [IBM Python Flask App]() - To create restful API
-- [IBM toolchain (CI/CD)]()- To deploy restful API and web ui
+- [IBM Cloud Foundry](https://www.cloudfoundry.org/the-foundry/ibm-cloud-foundry/) - To deploy UI and python backend
+- [IBM Angular API](https://developer.ibm.com/technologies/web-development/tutorials/wa-implement-a-single-page-application-with-angular2/)- The web framework used
+- [IBM Watson Studio](https://www.ibm.com/in-en/cloud/watson-studio) - Data Preparation
+- [IBM Python Flask App](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/ml-python-flask-mnist-tutorial.html) - To create restful API
+- [IBM toolchain (CI/CD)](https://www.ibm.com/in-en/cloud/continuous-delivery)- To deploy restful API and web ui
 
 ## Contributing
 
